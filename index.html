@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="imgs/icons8-два-смартфона-32.png" type="image/png">
+        <title>TECH-ZONE</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link href="./css/style.css" rel="stylesheet">
+
+
+    </head>
+    <div class="template" style="content-visibility: hidden;">
+
+        <div class="product-col col-lg-3 col-sm-6 col-6" id="template">
+            <div class="product-card">
+                <div class="product-thumb">
+                    <div class="img-container"><img class="product-img" loading="lazy" src="" alt=""></div>
+                </div>
+                <div class="product-details text-center">
+                    <h6 class="text-center"><span class="product-name" data-original-product-name=""></span></h6>
+                    <p class="description"></p>
+                    <div class="product-bottom-details d-flex justify-content-between">
+                        <div class="price">
+                            <small class="old-price"></small>
+                            <span class="new-price product-price"></span>
+                        </div>
+                        <div class="product-links">
+                            <a href="#" class="product-link cart"> <i class="fa-solid fa-cart-shopping fa-lg"></i></a>
+                            <a href="#" class="product-link follow"> <i class="fa-solid fa-heart fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <body id="body">
+
+        <nav class="main-header  position-fixed w-100   navbar navbar-expand-md  bg-light ">
+            <div class="container-fluid">
+                <a id="navbar-brand" class="logo navbar-brand" href="#">Tech-Zone</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarHeaderMenu" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarHeaderMenu">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 top-menu">
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#target-for-scroll">Catalog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#news-modal">News</a>
+                        </li>
+
+
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                        <!-- ---------------------------------------------SIGN-UP & LOGIN------------------------ -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                                <i class="fa-regular fa-user fa-lg"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#signupModal">Sign-up </a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#loginModal">Login</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- ---------------------------------------------FOLLOW------------------------ -->
+                        <li class="nav-item  ">
+                            <a class="nav-link " title="Followed products" href="#" data-bs-toggle="modal"
+                                data-bs-target="#modal-follow">
+                                <i class="fa-solid fa-heart fa-lg"></i>
+                            </a>
+
+                        </li>
+                        <!-- ---------------------------------------------CART------------------------ -->
+                        <li class="nav-item ">
+                            <a class="nav-link " title="Cart for products" href="#" data-bs-toggle="modal"
+                                data-bs-target="#modal-cart">
+                                <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                            </a>
+
+
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="modal fade" id="news-modal" tabindex="-1" aria-labelledby="news-modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-xl ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 w-100 text-center" id="news-modal-label">news</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0">
+                        <div id="newsCarousel" class="carousel slide">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="imgs/salesonphones (2).jpg" class="news-image d-block w-100" alt="News 1">
+                                    <div class="carousel-caption">
+                                        <h3>Phone sale starts right now!</h3>
+                                        <p>Upgrade your tech with the latest
+                                            smartphones at unbeatable prices in our store. Don't miss
+                                            out on the chance to grab your favorite device while stocks
+                                            last!</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="imgs/blackFriday.jpg" class="news-image d-block w-100" alt="News 1">
+                                    <div class="carousel-caption">
+                                        <h3>Black Friday Alert: 35% Off on Samsung, Xiaomi, and Apple
+                                            Tech!</h3>
+
+                                        <p>Get ready to upgrade your tech game with an
+                                            incredible <strong>35% discount</strong> on a range of
+                                            gadgets from Samsung, Xiaomi, and Apple.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid my-carousel p-0">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="imgs/1.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="imgs/2.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="imgs/3.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <!-- ---------------------------------------------SIGN-UP------------------------ -->
+
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h1 class="modal-title fs-5 w-100 " id="signupModalLabel ">sign-up</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="d-flex flex-column align-items-center">
+                            <div class="form-group mb-3 w-100">
+                                <label for="username ">Username</label>
+                                <input type="text" class="form-control " id="username" placeholder="Enter username"
+                                    required>
+                            </div>
+                            <div class="form-group mb-3 w-100">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                            </div>
+                            <div class="form-group mb-3 w-100">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password "
+                                    required>
+                            </div>
+                            <div class="form-group mb-3 w-100">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirm-password"
+                                    placeholder="Confirm Password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer ">
+                        <p class="modal-footer-text">if you have an account, <a href="#" class="modal-footer-link"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">login</a> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ---------------------------------------------login------------------------ -->
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h1 class="modal-title fs-5 w-100 " id="loginModalLabel ">login</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="d-flex flex-column align-items-center">
+                            <div class="form-group mb-3 w-100">
+                                <label class="pb-1" for="login-email">e-mail</label>
+                                <input type="email" class="form-control " id="login-email" placeholder="Enter e-mail"
+                                    required>
+                            </div>
+                            <div class="form-group mb-3 w-100">
+                                <label class="pb-1" for="login-password">Password</label>
+                                <input type="password" class="form-control" id="login-password"
+                                    placeholder="Enter password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer ">
+                        <p class="modal-footer-text">if you don't have an account, <a href="#" class="modal-footer-link"
+                                data-bs-toggle="modal" data-bs-target="#signupModal">sign-up</a> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ---------------------------------------------CART------------------------ -->
+        <div class="modal fade " id="modal-cart" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-fullscreen-lg-down ">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h1 class="modal-title fs-5 bg-secondary p-2 w-100 bg-opacity-10" id="cartModalLabel">Your
+                            shopping cart <i class="fa-solid fa-cart-shopping fa-lg"></i></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body tbody">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Final price</th>
+                                    <th scope="col">Add to follow</th>
+                                    <th scope="col"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="table-body-cart">
+                            </tbody>
+                            <tr id="total-row" style="display: none">
+                                <th scope="row"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Total:</td>
+                                <td class="all-product-price">0ZL</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">continue
+                            shopping</button>
+                        <button type="button" class="btn btn-primary order-btn">make an
+                            order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ---------------------------------------------FOLLOW------------------------ -->
+        <div class="modal fade" id="modal-follow" tabindex="-1" aria-labelledby="followModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-fullscreen-lg-down">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h1 class="modal-title fs-5 bg-secondary p-2 w-100 bg-opacity-10" id="followModalLabel">Your
+                            followed products <i class="fa-solid fa-heart fa-lg" style="color: #ff0040;"></i></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body ">
+                        <table class="table">
+                            <thead>
+                                <tr class="w-100">
+                                    <th scope="col"></th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Add to cart</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="follow-table-body">
+                                <!-- Товары будут добавляться сюда -->
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">continue
+                            shopping</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="main-content ">
+            <div class="container-fluid">
+                <div class="row" id="target-for-scroll">
+                    <form class=" justify-content-center d-flex mb-3 align-items-center " role="search">
+                        <input class="form-control  " type="search" placeholder="Search" id="search-input"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success" type="button" id="search-button">Search</button>
+                    </form>
+                    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                        <!-- //Categories -->
+                        <div class="accordion" id="accordionCategories">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button"
+                                        style="text-transform: uppercase; font-weight: 700;" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                                        aria-controls="collapseOne">
+                                        Categories
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    data-bs-parent="#accordionCategories">
+                                    <div class="accordion-body">
+                                        <div class="position-sticky">
+                                            <ul class="menu__list">
+                                                <li class="menu__list-link _active" data-target="product-row-phone">
+                                                    Phones
+                                                </li>
+                                                <li class="menu__list-link" data-target="product-row-monitor">Monitors
+                                                </li>
+                                                <li class="menu__list-link" data-target="product-row-keyboard">
+                                                    Keyboards</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </nav>
+
+                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="target-for-insert">
+                        <div class="row product-row" id="product-row-phone">
+                        </div>
+                        <div class="row product-row" id="product-row-monitor">
+                        </div>
+                        <div class="row product-row" id="product-row-keyboard">
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </section>
+        <div class="popup-table-container" id="popup-cart">
+            <div class="popup-table " id="popup-table-cart">
+            </div>
+        </div>
+    </body>
+
+    <footer>
+        <section class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-6">
+                        <h4>Our shop</h4>
+                        <ul class="list-unstyled">
+                            <li><strong>Place:</strong></li>
+                            <li><a target="_blank"
+                                    href="https://www.google.com/maps/place/%D0%92%D0%B0%D1%80%D1%88%D0%B0%D0%B2%D0%B0/@52.2330335,20.8963899,11z/data=!3m1!4b1!4m6!3m5!1s0x471ecc669a869f01:0x72f0be2a88ead3fc!8m2!3d52.2296756!4d21.0122287!16zL20vMDgxbV8?entry=ttu"><strong>Warszaw.
+                                        Jana Pawla II street / 21</strong></a></li>
+                            <li><strong>Time of work:</strong>
+                            </li>
+                            <li>Monday-saturday: 8:00 - 17:00</li>
+
+                        </ul>
+
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <h4>E-shop information</h4>
+                        <ul class="list-unstyled">
+
+                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#termsOfSiteModal"><strong>Website
+                                        terms of
+                                        use</strong></a></li>
+                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#PayDeliveryModal"><strong>Payment
+                                        and Delivery agreement</strong></a></li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="modal fade" id="termsOfSiteModal" tabindex="-1" aria-labelledby="termsOfSiteModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-scrollable ">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <h1 class="modal-title fs-5 w-100" id="termsOfSiteModalLabel">Terms and Conditions
+                                        of the
+                                        Online Store Agreement
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="termsOfUseBody">
+
+                                </div>
+
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="PayDeliveryModal" tabindex="-1" aria-labelledby="PayDeliveryModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <h1 class="modal-title fs-5 w-100" id="PayDeliveryModalLabel">Payment
+                                        and Delivery agreement
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="payDeliveryBody">
+
+                                </div>
+
+                                <div class="modal-footer ">
+                                    <button type="button" class="btn btn-secondary "
+                                        data-bs-dismiss="modal">Close</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <h4>Contacts</h4>
+                        <ul class="list-unstyled">
+                            <li><strong>Managers numbers:</strong></li>
+                            <li><a href="tel:555989383">555 999 333</a></li>
+                            <li><a href="tel:555989383">333 777 111</a></li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <h4>Our networks</h4>
+                        <ul class="list">
+                            <li style="--i:#0000ff; --j:#4000ff;" class="list-li">
+                                <a class="list-link" href="https://www.facebook.com" target="_blank">
+                                    <span class="icon"><i class="fa fa-facebook"></i></span>
+                                    <span class="title">facebook</span>
+                                </a>
+                            </li>
+                            <li style="--i:#ffbf00; --j:#bf00ff;" class="list-li">
+                                <a class="list-link" href="https://www.instagram.com" target="_blank">
+                                    <span class="icon"><i class="fa fa-instagram"></i></span>
+                                    <span class="title">instagram</span>
+                                </a>
+                            </li>
+                            <li style="--i:#df2020; --j:#ff0040;" class="list-li">
+                                <a class="list-link" href="https://www.youtube.com" target="_blank">
+                                    <span class="icon"><i class="fa fa-youtube"></i></span>
+                                    <span class="title">youtube</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="https://kit.fontawesome.com/c8d9ee6633.js" crossorigin="anonymous"></script>
+
+</html>
