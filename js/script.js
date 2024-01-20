@@ -17,8 +17,38 @@ window.addEventListener('scroll', () => {
 
     lastScroll = scrollPosition()
 })
+function setPopup(backgroundColor, maxWidth, htmlText) {
+    const popupContainer = document.getElementById('popup-cart');
+    const popupTable = document.getElementById('popup-table-cart');
+    popupTable.innerHTML = htmlText;
+    popupContainer.style.maxWidth = maxWidth;
+    popupTable.style.backgroundColor = backgroundColor;
+}
 
+function showPopup(str) {
 
+    const popupContainer = document.getElementById('popup-cart');
+    if (str === "cart") {
+        setPopup('#cef5d9', `500px`, '<span>Product added to cart! <i class="fa-solid fa-shopping-cart fa-lg"></i></span>  <a class="link-in-popup "  title=""  data-bs-toggle="modal" data-bs-target="#modal-cart">open</a>');
+    } else if (str === "follow") {
+        setPopup('#cef5d9', `500px`, '<span>Product added to "Followed products"! <i class="fa-solid fa-heart fa-lg" style = "color: #ff2600;" ></i ></span>  <a class="link-in-popup"  title="" data-bs-toggle="modal" data-bs-target="#modal-follow">open</a>');
+    } else if (str === "sameProduct") {
+        setPopup('#f5cece', `400px`, '<span>This product has already been added</span>');
+    } else if (str === "order") {
+        setPopup('#f5cece', `400px`, '<span>This is not real online store!</span>');
+    }
+    setTimeout(() => {
+        popupContainer.style.bottom = '5dvh';
+        popupContainer.style.opacity = '1';
+        popupContainer.style.visibility = 'visible';
+        setTimeout(() => {
+            popupContainer.style.bottom = '0';
+            popupContainer.style.opacity = '0';
+            popupContainer.style.visibility = 'hidden';
+        }, 2500);
+    }, 100);
+}
+//DATA FNS
 async function fetchProductsData(link) {
 
     try {
@@ -35,8 +65,6 @@ async function fetchProductsData(link) {
     }
 
 }
-
-
 
 function dataProcesing(data, route) {
 
@@ -83,6 +111,7 @@ function dataProcesing(data, route) {
     }
 
 }
+//
 
 const createRowFromData = (item, route) => {
     if (route === 'cart') {
@@ -112,7 +141,7 @@ const createRowFromData = (item, route) => {
     }
 }
 
-function updateTotalPrice() {
+function updateAllProductPrice() {
 
     totalPrice = 0
 
@@ -123,65 +152,32 @@ function updateTotalPrice() {
     allProductPriceCell.textContent = `${totalPrice}zl`;
 }
 
-
-
-function updateFinalPriceAndTotal(row, productPrice, quantity) {
+function updateProductFinalPrice(row, productPrice, quantity) {
     const finalPriceCell = row.querySelector('.final-product-price');
     const finalPrice = productPrice * quantity;
     finalPriceCell.textContent = `${finalPrice}zl`;
 
-    updateTotalPrice();
+    updateAllProductPrice();
 }
 
-const setPopup = (backgroundColor, maxWidth, htmlText) => {
-    const popupContainer = document.getElementById('popup-cart');
-    const popupTable = document.getElementById('popup-table-cart');
-    popupTable.innerHTML = htmlText;
-    popupContainer.style.maxWidth = maxWidth;
-    popupTable.style.backgroundColor = backgroundColor;
-}
 
-function showPopup(str) {
-
-    const popupContainer = document.getElementById('popup-cart');
-    if (str === "cart") {
-        setPopup('#cef5d9', `500px`, '<span>Product added to cart! <i class="fa-solid fa-shopping-cart fa-lg"></i></span>  <a class="link-in-popup "  title=""  data-bs-toggle="modal" data-bs-target="#modal-cart">open</a>');
-    } else if (str === "follow") {
-        setPopup('#cef5d9', `500px`, '<span>Product added to "Followed products"! <i class="fa-solid fa-heart fa-lg" style = "color: #ff2600;" ></i ></span>  <a class="link-in-popup"  title="" data-bs-toggle="modal" data-bs-target="#modal-follow">open</a>');
-    } else if (str === "sameProduct") {
-        setPopup('#f5cece', `400px`, '<span>This product has already been added</span>');
-    } else if (str === "order") {
-        setPopup('#f5cece', `400px`, '<span>This is not real online store!</span>');
-    }
-    setTimeout(() => {
-        popupContainer.style.bottom = '5dvh';
-        popupContainer.style.opacity = '1';
-        popupContainer.style.visibility = 'visible';
-        setTimeout(() => {
-            popupContainer.style.bottom = '0';
-            popupContainer.style.opacity = '0';
-            popupContainer.style.visibility = 'hidden';
-        }, 2500);
-    }, 100);
-}
 
 function quantityInputFunctions(input, productPrice, row) {
-    updateTotalPrice();
 
-    totalRow.style.display = 'table-row';
+    // totalRow.style.display = 'table-row';
     input.addEventListener('input', function () {
         let quantity = parseInt(input.value);
         if (quantity >= 1) {
 
             if (quantity <= 15) {
 
-                updateFinalPriceAndTotal(row, productPrice, quantity);
+                updateProductFinalPrice(row, productPrice, quantity);
             } else {
                 input.value = Math.floor(quantity / 10);
-                updateFinalPriceAndTotal(row, productPrice, input.value);
+                updateProductFinalPrice(row, productPrice, input.value);
             }
         } else {
-            updateFinalPriceAndTotal(row, productPrice, 1);
+            updateProductFinalPrice(row, productPrice, 1);
         }
 
     });
@@ -201,30 +197,27 @@ let totalPrice = 0;
 const cartTableBody = document.getElementById('table-body-cart');
 
 document.addEventListener('DOMContentLoaded', async function () {
-    let products = await fetchProductsData('https://raw.githubusercontent.com/rrrkkkvvv/products.github.io/main/products.json')
-    let text = await fetchProductsData('https://raw.githubusercontent.com/rrrkkkvvv/products.github.io/main/texts.json')
-    dataProcesing(products, 'products')
-    dataProcesing(text, "termsOfUse")
-    allEvents()
+    let products = await fetchProductsData('https://raw.githubusercontent.com/rrrkkkvvv/products.github.io/main/products.json');
+    let text = await fetchProductsData('https://raw.githubusercontent.com/rrrkkkvvv/products.github.io/main/texts.json');
+    dataProcesing(products, 'products');
+    dataProcesing(text, "termsOfUse");
+    allEvents();
     JSON.parse(localStorage.getItem('cartProducts')).forEach(item => {
+        const cartItem = createRowFromData(item, 'cart');
 
+        let quantityInput = cartItem.querySelector('.quantity-product');
+        quantityInputFunctions(quantityInput, parseFloat(item.productPrice), cartItem);
 
-        const cartItem = createRowFromData(item, 'cart')
-
-
-        let quantityInput = cartItem.querySelector('.quantity-product')
-        quantityInputFunctions(quantityInput, parseFloat(item.productPrice), cartItem)
-
-        cartProducts.push(item)
-        cart.appendChild(cartItem)
-    })
-    updateTotalPrice()
+        cartProducts.push(item);
+        cart.appendChild(cartItem);
+    });
+    updateAllProductPrice()
     JSON.parse(localStorage.getItem('followProducts')).forEach(item => {
 
         const followItem = createRowFromData(item, 'follow');
-        followProducts.push(item)
-        follow.appendChild(followItem)
-    })
+        followProducts.push(item);
+        follow.appendChild(followItem);
+    });
 })
 
 
@@ -289,13 +282,13 @@ function allEvents() {
 
 
     function checkIfAllLettersPresent(string, arrayForCheck) {
-        const letterCountMap = {}
+        const letterCountMap = {};
         for (const char of string) {
-            letterCountMap[char] = (letterCountMap[char] || 0) + 1
+            letterCountMap[char] = (letterCountMap[char] || 0) + 1;
         }
 
         return arrayForCheck.every(char => {
-            const countInString = letterCountMap[char] || 0
+            const countInString = letterCountMap[char] || 0;
             const countInArray = arrayForCheck.filter(el => el === char).length;
             return countInString >= countInArray;
         })
@@ -303,27 +296,28 @@ function allEvents() {
 
 
     function search(inputValue) {
+
         if (inputValue !== '') {
 
             allItems.forEach((elem) => {
 
+
+
                 let productName = elem.querySelector(".product-name").textContent;
-                let productNameInnerHTML = elem.querySelector(".product-name").innerHTML;
                 let splitInputValue = inputValue.split('');
 
-
                 if (checkIfAllLettersPresent(productName.toLowerCase(), splitInputValue)) {
+
+
                     elem.classList.remove('hide');
 
-                    splitInputValue.forEach((char) => {
 
-                        elem.querySelector(".product-name").innerHTML = replaceLettersWithSpan(productNameInnerHTML, char);
+                    elem.querySelector(".product-name").innerHTML = markLetters(productName, splitInputValue);
 
-                    })
 
                 } else {
                     elem.classList.add('hide');
-                    elem.querySelector(".product-name").innerHTML = elem.querySelector(".product-name").textContent;
+                    elem.querySelector(".product-name").innerHTML = productName;
                 }
             });
         } else {
@@ -334,29 +328,27 @@ function allEvents() {
         }
     }
 
-
-    function replaceLettersWithSpan(inputString, targetLetter) {
+    function markLetters(productName, splitInputValue) {
         const tempContainer = document.createElement('div');
-        tempContainer.innerHTML = inputString;
+        tempContainer.innerHTML = productName;
 
-        const textNodes = getTextNodes(tempContainer);
+        splitInputValue.forEach((char) => {
+            const textNodes = getTextNodes(tempContainer);
 
+            textNodes.forEach((node) => {
+                const replacedHTML = node.nodeValue.replace(new RegExp(char, 'gi'), match => `<span class="marked-text">${match}</span>`);
+                const tempDiv = document.createElement('div');
 
-        textNodes.forEach(node => {
+                tempDiv.innerHTML = replacedHTML;
 
-            const replacedHTML = node.nodeValue.replace(new RegExp(targetLetter, 'gi'), match => `<span class="marked-text">${match}</span>`);
-            const tempDiv = document.createElement('div');
+                node.replaceWith(...tempDiv.childNodes);
 
-            tempDiv.innerHTML = replacedHTML;
+            })
 
-            node.replaceWith(...tempDiv.childNodes);
-
-
-
-        });
-
-        return tempContainer.innerHTML;
+        })
+        return tempContainer.innerHTML
     }
+
 
     function getTextNodes(element) {
         const textNodes = [];
@@ -406,7 +398,7 @@ function allEvents() {
      `;
 
 
-        return newRow.innerHTML
+        return newRow.innerHTML;
 
     }
 
@@ -420,7 +412,7 @@ function allEvents() {
 
             row.remove();
 
-            updateTotalPrice();
+            updateAllProductPrice();
 
 
 
@@ -492,12 +484,6 @@ function allEvents() {
         }
     });
 
-
-
-
-
-
-
     productCartLinks.forEach((link) => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
@@ -512,7 +498,7 @@ function allEvents() {
 
             if (checkProductUniqueness(productCard.querySelector('.product-name'), cartTableBody)) {
                 cartTableBody.appendChild(newRow);
-                updateTotalPrice();
+                updateAllProductPrice();
                 addToLocalStorage(newRow, 'cart')
 
                 totalRow.style.display = 'table-row';
@@ -531,7 +517,7 @@ function allEvents() {
     cartTableBody.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-product')) {
             removeProduct(e, 'cart');
-            updateTotalPrice();
+            updateAllProductPrice();
         }
         if (e.target.classList.contains('follow')) {
 
@@ -552,9 +538,6 @@ function allEvents() {
             }
         }
     });
-
-
-
 
     productFollowLinks.forEach((link) => {
         link.addEventListener('click', function (e) {
@@ -599,7 +582,7 @@ function allEvents() {
 
                 quantityInputFunctions(quantityInput, productPrice, newFollowRow)
 
-                updateTotalPrice();
+                updateAllProductPrice();
                 totalRow.style.display = 'table-row';
                 showPopup('cart');
 
