@@ -1,22 +1,19 @@
-let lastScroll = 0
-const defaultOffSet = 200
-const header = document.querySelector('.main-header')
+let lastScroll = 0;
+const defaultOffSet = 200;
+const header = document.querySelector('.main-header');
 
-const scrollPosition = () => window.pageYOffset || document.documentElement.scrollTop
-
-const containHide = () => header.classList.contains('hideHeader')
+const scrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
+const containHide = () => header.classList.contains('hideHeader');
 
 window.addEventListener('scroll', () => {
     if (scrollPosition() > lastScroll && !containHide()) {
-        header.classList.add('hideHeader')
+        header.classList.add('hideHeader');
     } else if (scrollPosition() < lastScroll && containHide()) {
-        header.classList.remove('hideHeader')
-
+        header.classList.remove('hideHeader');
     }
-
-
-    lastScroll = scrollPosition()
+    lastScroll = scrollPosition();
 })
+
 function setPopup(backgroundColor, maxWidth, htmlText) {
     const popupContainer = document.getElementById('popup-cart');
     const popupTable = document.getElementById('popup-table-cart');
@@ -24,7 +21,6 @@ function setPopup(backgroundColor, maxWidth, htmlText) {
     popupContainer.style.maxWidth = maxWidth;
     popupTable.style.backgroundColor = backgroundColor;
 }
-
 function showPopup(str) {
 
     const popupContainer = document.getElementById('popup-cart');
@@ -65,7 +61,6 @@ async function fetchProductsData(link) {
     }
 
 }
-
 function dataProcesing(data, route) {
 
     if (route === "products") {
@@ -104,10 +99,10 @@ function dataProcesing(data, route) {
 
         });
     } else if (route === "termsOfUse") {
-        let termsOfUseBody = document.getElementById('termsOfUseBody')
-        termsOfUseBody.innerHTML = data.htmlForTermsOfUse
-        let payDeliveryBody = document.getElementById('payDeliveryBody')
-        payDeliveryBody.innerHTML = data.htmlForPayDelivery
+        let termsOfUseBody = document.getElementById('termsOfUseBody');
+        termsOfUseBody.innerHTML = data.htmlForTermsOfUse;
+        let payDeliveryBody = document.getElementById('payDeliveryBody');
+        payDeliveryBody.innerHTML = data.htmlForPayDelivery;
     }
 
 }
@@ -126,7 +121,7 @@ const createRowFromData = (item, route) => {
          <td ><i class="follow fa-solid fa-heart fa-xl " ></i></td>
          <td><i class="fa-solid fa-x fa-xl remove-product" ></i></td>
      `;
-        return cartItem
+        return cartItem;
     } else if (route === 'follow') {
         const followItem = document.createElement('tr');
         followItem.innerHTML = `
@@ -137,14 +132,12 @@ const createRowFromData = (item, route) => {
          <td ><i class="cart fa-solid fa-shopping-cart fa-xl " ></i></td>
          <td><i class="fa-solid fa-x fa-xl remove-product" ></i></td>
      `;
-        return followItem
+        return followItem;
     }
 }
 
 function updateAllProductPrice() {
-
     totalPrice = 0
-
     cartTableBody.querySelectorAll('tr').forEach((row) => {
         const rowFinalPrice = parseFloat(row.querySelector('.final-product-price').textContent.replace('zl', ''));
         totalPrice += rowFinalPrice;
@@ -160,16 +153,12 @@ function updateProductFinalPrice(row, productPrice, quantity) {
     updateAllProductPrice();
 }
 
-
-
 function quantityInputFunctions(input, productPrice, row) {
 
     input.addEventListener('input', function () {
         let quantity = parseInt(input.value);
         if (quantity >= 1) {
-
             if (quantity <= 15) {
-
                 updateProductFinalPrice(row, productPrice, quantity);
             } else {
                 input.value = Math.floor(quantity / 10);
@@ -178,9 +167,7 @@ function quantityInputFunctions(input, productPrice, row) {
         } else {
             updateProductFinalPrice(row, productPrice, 1);
         }
-
-    });
-
+    })
 }
 
 const cart = document.getElementById('table-body-cart');
@@ -188,7 +175,6 @@ const follow = document.getElementById('follow-table-body');
 
 let cartProducts = [];
 let followProducts = [];
-
 
 const totalRow = document.getElementById('total-row');
 const allProductPriceCell = totalRow.querySelector('.all-product-price');
@@ -219,9 +205,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 })
 
-
-
-
 function allEvents() {
 
 
@@ -242,21 +225,21 @@ function allEvents() {
         }
 
         function checkForFrequency(route, product) {
-            let checker
+            let checker;
             if (route === "cart") {
                 cartProducts.forEach(item => {
                     if (item.productName === product.productName) {
-                        checker = false
+                        checker = false;
                     }
                 })
             } else {
                 followProducts.forEach(item => {
                     if (item.productName === product.productName) {
-                        checker = false
+                        checker = false;
                     }
                 })
             }
-            return checker
+            return checker;
         }
 
         if (route === "cart") {
@@ -290,21 +273,14 @@ function allEvents() {
         })
     }
 
-
     function search(inputValue) {
-
         if (inputValue !== '') {
-
             allItems.forEach((elem) => {
-
                 let productName = elem.querySelector(".product-name").textContent;
                 let splitInputValue = inputValue.split('');
-
                 if (checkIfAllLettersPresent(productName.toLowerCase(), splitInputValue)) {
-
                     elem.classList.remove('hide');
                     elem.querySelector(".product-name").innerHTML = markLetters(productName, splitInputValue);
-
                 } else {
                     elem.classList.add('hide');
                     elem.querySelector(".product-name").innerHTML = productName;
@@ -324,52 +300,41 @@ function allEvents() {
 
         splitInputValue.forEach((char) => {
             const textNodes = getTextNodes(tempContainer);
-
             textNodes.forEach((node) => {
                 const replacedHTML = node.nodeValue.replace(new RegExp(char, 'gi'), match => `<span class="marked-text">${match}</span>`);
                 const tempDiv = document.createElement('div');
-
                 tempDiv.innerHTML = replacedHTML;
-
                 node.replaceWith(...tempDiv.childNodes);
-
             })
-
         })
-        return tempContainer.innerHTML
+        return tempContainer.innerHTML;
     }
 
 
     function getTextNodes(element) {
         const textNodes = [];
-
         const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+
         while (walker.nextNode()) {
             textNodes.push(walker.currentNode);
         }
-
         return textNodes;
     }
 
-
-
-
-    function checkProductUniqueness(pName, body) {
-
-        let check = false
+    function checkProductUniqueness(productName, body) {
+        let check;
         let allNames = body.querySelectorAll('.product-name');
 
         allNames.forEach(name => {
-            if (pName.innerHTML === name.innerHTML) {
-                check = true
+            if (productName.innerHTML === name.innerHTML) {
+                check = true;
             }
         });
-        return !check
+        return check;
     }
 
     function createNewRowFromCard(productCard, isCart) {
         const productName = productCard.querySelector('.product-name').textContent;
-
         const newRow = document.createElement('tr');
 
         newRow.innerHTML = `
@@ -382,10 +347,7 @@ function allEvents() {
          ${isCart ? '<td ><i class="follow fa-solid fa-heart fa-xl " ></i></td>' : '<td ><i class="cart fa-solid fa-shopping-cart fa-xl " ></i></td>'}
          <td><i class="fa-solid fa-x fa-xl remove-product" ></i></td>
      `;
-
-
         return newRow.innerHTML;
-
     }
 
     function removeProduct(e, route) {
@@ -431,7 +393,6 @@ function allEvents() {
     const menuLinks = document.querySelectorAll('.menu__list-link');
     const contentRows = document.querySelectorAll('.product-row');
 
-
     const productCartLinks = document.querySelectorAll('.cart');
     const productFollowLinks = document.querySelectorAll('.follow');
     const followTableBody = document.getElementById('follow-table-body');
@@ -446,16 +407,14 @@ function allEvents() {
             });
 
             const target = link.getAttribute('data-target');
-
             const selectedContent = document.getElementById(target);
 
             if (selectedContent) {
                 link.classList.add('_active');
                 selectedContent.style.contentVisibility = 'visible';
             }
-        });
-    });
-
+        })
+    })
 
     const productPriceElements = document.querySelectorAll('.price');
 
@@ -468,18 +427,15 @@ function allEvents() {
         } else {
             newPriceElement.style.color = '#5fa36a';
         }
-    });
+    })
 
     productCartLinks.forEach((link) => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
-
             const productCard = link.closest('.product-card');
-
-
             const productPrice = parseFloat(productCard.querySelector('.new-price').textContent.replace('zl', ''));
-
             const newRow = document.createElement('tr');
+
             newRow.innerHTML = createNewRowFromCard(productCard, 'isCart')
 
             if (checkProductUniqueness(productCard.querySelector('.product-name'), cartTableBody)) {
@@ -492,13 +448,11 @@ function allEvents() {
 
                 const quantityInput = newRow.querySelector('.quantity-product');
                 quantityInputFunctions(quantityInput, productPrice, newRow)
-
             } else {
                 showPopup('sameProduct')
             }
-
-        });
-    });
+        })
+    })
 
     cartTableBody.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-product')) {
@@ -523,7 +477,7 @@ function allEvents() {
                 showPopup('sameProduct')
             }
         }
-    });
+    })
 
     productFollowLinks.forEach((link) => {
         link.addEventListener('click', function (e) {
@@ -532,18 +486,18 @@ function allEvents() {
             const productCard = link.closest('.product-card');
 
             const newRow = document.createElement('tr');
-            newRow.innerHTML = createNewRowFromCard(productCard)
+            newRow.innerHTML = createNewRowFromCard(productCard);
 
             if (checkProductUniqueness(productCard.querySelector('.product-name'), followTableBody)) {
-                followTableBody.appendChild(newRow)
-                addToLocalStorage(newRow)
-                showPopup('follow')
+                followTableBody.appendChild(newRow);
+                addToLocalStorage(newRow);
+                showPopup('follow');
             } else {
-                showPopup('sameProduct')
+                showPopup('sameProduct');
             }
 
-        });
-    });
+        })
+    })
 
     followTableBody.addEventListener('click', function (e) {
         if (e.target.classList.contains('remove-product')) {
@@ -551,42 +505,34 @@ function allEvents() {
         }
         if (e.target.classList.contains('cart')) {
             let target = e.target;
-
             const productFollowRow = target.closest('tr');
-
-
             const productPrice = parseFloat(productFollowRow.querySelector('.product-price').textContent.replace('zl', ''));
             const newFollowRow = document.createElement('tr');
-            newFollowRow.innerHTML = createNewRowFromCard(productFollowRow, 'isCart')
 
+            newFollowRow.innerHTML = createNewRowFromCard(productFollowRow, 'isCart');
 
             if (checkProductUniqueness(productFollowRow.querySelector('.product-name'), cartTableBody)) {
                 cartTableBody.appendChild(newFollowRow);
-                addToLocalStorage(newFollowRow, 'cart')
+                addToLocalStorage(newFollowRow, 'cart');
                 const quantityInput = newFollowRow.querySelector('.quantity-product');
 
-                quantityInputFunctions(quantityInput, productPrice, newFollowRow)
+                quantityInputFunctions(quantityInput, productPrice, newFollowRow);
 
                 updateAllProductPrice();
                 totalRow.style.display = 'table-row';
                 showPopup('cart');
-
-
-
             } else {
-                showPopup('sameProduct')
+                showPopup('sameProduct');
             }
-        }
-    });
-
-
-    document.addEventListener('click', function (e) {
-        if (e.target.classList.contains('order-btn')) {
-            showPopup('order')
-        } else if (e.target.classList.contains('product-name')) {
-            e.preventDefault()
         }
     })
 
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('order-btn')) {
+            showPopup('order');
+        } else if (e.target.classList.contains('product-name')) {
+            e.preventDefault();
+        }
+    })
 }
 
