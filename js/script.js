@@ -164,7 +164,6 @@ function updateProductFinalPrice(row, productPrice, quantity) {
 
 function quantityInputFunctions(input, productPrice, row) {
 
-    // totalRow.style.display = 'table-row';
     input.addEventListener('input', function () {
         let quantity = parseInt(input.value);
         if (quantity >= 1) {
@@ -243,39 +242,36 @@ function allEvents() {
         }
 
         function checkForFrequency(route, product) {
-            let count
+            let checker
             if (route === "cart") {
                 cartProducts.forEach(item => {
                     if (item.productName === product.productName) {
-                        count++
+                        checker = false
                     }
                 })
             } else {
                 followProducts.forEach(item => {
                     if (item.productName === product.productName) {
-                        count++
+                        checker = false
                     }
                 })
             }
-            return count
+            return checker
         }
 
         if (route === "cart") {
-            if (!checkForFrequency('cart', productForLocalStorage)) {
-
+            if (checkForFrequency('cart', productForLocalStorage)) {
 
                 cartProducts.push(productForLocalStorage);
                 saveLocalStorage();
 
             }
         } else {
-            if (!checkForFrequency('follow', productForLocalStorage)) {
+            if (checkForFrequency('follow', productForLocalStorage)) {
                 followProducts.push(productForLocalStorage);
                 saveLocalStorage();
             }
         }
-
-
 
     }
 
@@ -301,19 +297,13 @@ function allEvents() {
 
             allItems.forEach((elem) => {
 
-
-
                 let productName = elem.querySelector(".product-name").textContent;
                 let splitInputValue = inputValue.split('');
 
                 if (checkIfAllLettersPresent(productName.toLowerCase(), splitInputValue)) {
 
-
                     elem.classList.remove('hide');
-
-
                     elem.querySelector(".product-name").innerHTML = markLetters(productName, splitInputValue);
-
 
                 } else {
                     elem.classList.add('hide');
@@ -376,10 +366,6 @@ function allEvents() {
         });
         return !check
     }
-
-
-
-
 
     function createNewRowFromCard(productCard, isCart) {
         const productName = productCard.querySelector('.product-name').textContent;
@@ -558,7 +544,6 @@ function allEvents() {
 
         });
     });
-
 
     followTableBody.addEventListener('click', function (e) {
         if (e.target.classList.contains('remove-product')) {
