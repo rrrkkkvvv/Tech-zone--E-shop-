@@ -207,7 +207,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 function allEvents() {
 
-
     function saveLocalStorage() {
         localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
         localStorage.setItem('followProducts', JSON.stringify(followProducts));
@@ -257,8 +256,6 @@ function allEvents() {
         }
 
     }
-
-
 
     function checkIfAllLettersPresent(string, arrayForCheck) {
         const letterCountMap = {};
