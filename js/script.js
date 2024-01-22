@@ -532,4 +532,3 @@ function allEvents() {
         }
     })
 }
-
