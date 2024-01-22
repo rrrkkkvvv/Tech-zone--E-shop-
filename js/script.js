@@ -224,7 +224,7 @@ function allEvents() {
         }
 
         function checkForFrequency(route, product) {
-            let checker;
+            let checker = true;
             if (route === "cart") {
                 cartProducts.forEach(item => {
                     if (item.productName === product.productName) {
@@ -319,12 +319,12 @@ function allEvents() {
     }
 
     function checkProductUniqueness(productName, body) {
-        let check;
+        let check = true;
         let allNames = body.querySelectorAll('.product-name');
 
         allNames.forEach(name => {
             if (productName.innerHTML === name.innerHTML) {
-                check = true;
+                check = false;
             }
         });
         return check;
@@ -400,7 +400,7 @@ function allEvents() {
                 link.classList.remove('_active');
             });
             contentRows.forEach(content => {
-                content.style.contentVisibility = 'hidden';
+                content.style.display = 'none';
             });
 
             const target = link.getAttribute('data-target');
@@ -408,7 +408,7 @@ function allEvents() {
 
             if (selectedContent) {
                 link.classList.add('_active');
-                selectedContent.style.contentVisibility = 'visible';
+                selectedContent.style.display = 'flex';
             }
         })
     })

@@ -196,7 +196,7 @@ td img {
 }
 
 #product-row-phone {
-  content-visibility: visible;
+  display: flex;
 }
 
 #search-input{
@@ -216,8 +216,7 @@ td img {
 }
 
 .product-row {
-  content-visibility: hidden;
-  display: flex;
+  display: none;
   flex-wrap: wrap;
 }
 
@@ -552,7 +551,7 @@ thead tr {
   }
 
   .list-li .title {
-    content-visibility: hidden;
+    display: none;
   }
 
   .list-li:hover .list-link i {
