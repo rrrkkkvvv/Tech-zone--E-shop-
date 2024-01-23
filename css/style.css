@@ -465,9 +465,8 @@ thead tr {
   filter: blur(15px);
 }
 
-.list-li:hover::after {
-  opacity: 0.5;
-}
+
+ 
 
 .list-link {
   z-index: 2;
@@ -482,11 +481,6 @@ thead tr {
   transition-delay: 0.25s;
 }
 
-.list-li:hover .list-link i {
-  transform: scale(0);
-  font-size: 1.75em;
-  transition: 0.25s;
-}
 
 .list-li .title {
   position: absolute;
@@ -499,8 +493,21 @@ thead tr {
   transition-delay: 0;
 }
 
-.list-li:hover .title {
-  transform: scale(1);
+
+@media(hover:hover){
+  
+  .list-li:hover::after {
+    opacity: 0.5;
+  }
+  
+  .list-li:hover .list-link i {
+    transform: scale(0);
+    font-size: 1.75em;
+    transition: 0.25s;
+  }
+  .list-li:hover .title {
+    transform: scale(1);
+  }
 }
 
 @media (min-width: 990px) and (max-width: 1142px) {
